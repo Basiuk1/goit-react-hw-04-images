@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Overlay, ModalStyle } from './Modal.styled';
 
-// const Modal = ({ selectedImage, onCloseModal }) => (
-// <Overlay onClick={onCloseModal}>
-//   <ModalStyle>
-//     <img src={selectedImage.largeImageURL} alt="" />
-//   </ModalStyle>
-// </Overlay>
-// );
-
-// export default Modal;
 export default class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);

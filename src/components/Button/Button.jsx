@@ -15,5 +15,5 @@ export default Button;
 
 Button.propTypes = {
   onLoadMore: PropTypes.func.isRequired,
-  showButton: PropTypes.bool.isRequired,
+  // showButton: PropTypes.bool.isRequired,
 };

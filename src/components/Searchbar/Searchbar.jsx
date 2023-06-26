@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Search,
@@ -8,54 +8,43 @@ import {
   SearchInput,
 } from './Searchbar.styled';
 
-import SearchIcon from '@mui/icons-material/Search';
+export default function Searchbar({ onSubmit }) {
+  const [query, setQuery] = useState('');
 
-export default class Searchbar extends Component {
-  state = {
-    query: '',
+  const handleNameChange = event => {
+    setQuery(event.currentTarget.value.toLowerCase());
   };
 
-  handleNameChange = event => {
-    this.setState({
-      query: event.currentTarget.value.toLowerCase(),
-    });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.query.trim() === '') {
+    if (query.trim() === '') {
       alert('Alert');
       return;
     }
 
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+    onSubmit(query);
+    // query('');
   };
 
-  render() {
-    return (
-      <Search>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <SearchButton type="submit">
-            <ButtonLabel>
-              <SearchIcon />
-              Search
-            </ButtonLabel>
-          </SearchButton>
+  return (
+    <Search>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchButton type="submit">
+          <ButtonLabel>Search</ButtonLabel>
+        </SearchButton>
 
-          <SearchInput
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.query}
-            onChange={this.handleNameChange}
-          />
-        </SearchForm>
-      </Search>
-    );
-  }
+        <SearchInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={query}
+          onChange={handleNameChange}
+        />
+      </SearchForm>
+    </Search>
+  );
 }
 
 Searchbar.propTypes = {
